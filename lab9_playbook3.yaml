@@ -1,0 +1,13 @@
+---
+- name: This is a playbook that gather package information
+  hosts: n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+
+  tasks:
+  - name: Gather package info
+    package_facts: 
+     manager: auto
+
+  - name: Display version of package setup
+    debug:
+      msg: The version of package setup is {{ packages['setup'][0].version }}
+       

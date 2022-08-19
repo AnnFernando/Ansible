@@ -1,0 +1,21 @@
+---
+- name: This is a playbook to install mariadb, dracut and snappy packages
+  hosts: n01517411-c-vm-dns-1.australiaeast.cloudapp.azure.com
+  
+  tasks:
+  - name: Install mariadb, dracut and snappy packages
+    ansible.builtin.yum: 
+      name: 
+       - "{{ package1 }}"
+       - "{{ package2 }}"
+       - "{{ package3 }}"
+      state: latest
+    loop: "{{ ansible_mounts }}"
+    when: item.mount == "/" and item.size_available > 2000000000
+
+
+
+ 
+
+
+    

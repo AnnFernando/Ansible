@@ -1,0 +1,9 @@
+---
+- name: This is a playbook to install ypserv package on linux inventory group
+  hosts: linux
+  tasks:
+   - name: Install ypserv package 
+     ansible.builtin.yum: 
+      name: 
+       - "{{ package }}"
+      state: latest

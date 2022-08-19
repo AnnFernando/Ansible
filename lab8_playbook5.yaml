@@ -1,0 +1,38 @@
+---
+- name: This is a playbook to create a user and a group account 
+  hosts: n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+  vars_files: 
+   - vars/userinfo
+
+  tasks:
+  - name: Creation of group group10
+    group:
+      name: "{{ grouplist1 }}"
+      gid: 1001
+      state: present
+
+  - name: Creation of group group20
+    group:
+      name: "{{ grouplist2 }}"
+      gid: 2001
+      state: present
+
+  - name: Creation of user user10
+    user:
+      name: "{{ userlist1 }}"
+      uid: 1800
+      shell: /bin/bash
+      state: present
+      groups: "{{ grouplist1 }}"
+      append: yes
+      home: /home/{{ userlist1 }}
+  
+  - name: Creation of user user20
+    user:
+      name: "{{ userlist2 }}"
+      uid: 1900
+      shell: /bin/bash
+      state: present
+      groups: "{{ grouplist2 }}"
+      append: yes
+      home: /home/{{ userlist2 }}

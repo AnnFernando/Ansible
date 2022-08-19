@@ -1,0 +1,8 @@
+---
+- name: This is a play with a task which use the yum module to install the package called cifs-utils on localhost 
+  hosts: linux
+  tasks:
+   - name: install cifs-utils
+     ansible.builtin.yum:
+      name: cifs-utils
+      state: present

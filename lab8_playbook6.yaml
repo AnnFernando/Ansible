@@ -1,0 +1,11 @@
+---
+- name: This is a playbook to install bind and evolution packages
+  hosts: n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+  
+  tasks:
+  - name: Install bind and evolution packages
+    ansible.builtin.yum: 
+      name: 
+       - "{{ package1 }}"
+       - "{{ package2 }}"
+      state: latest

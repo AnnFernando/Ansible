@@ -1,0 +1,17 @@
+---
+- name: This is a playbook which uses loop to create users.
+  hosts: linux
+  tasks:
+  - name: Creation of users
+    user:
+      name: "{{ item.0 }}"
+      uid: "{{ item.1 }}"
+      state: present
+    loop: "{{ userinfolist }}"
+
+
+
+ 
+
+
+    

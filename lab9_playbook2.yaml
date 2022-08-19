@@ -1,0 +1,11 @@
+---
+- name: This is a playbook that gather and show facts
+  hosts: n01517411-w-vm1-dns.australiaeast.cloudapp.azure.com
+  gather_facts: true
+
+  tasks:
+  - name: Display FQDN Ipv4 address and hostname of the node
+    debug:
+      msg: > 
+       The FQDN is {{ ansible_facts['fqdn'] }} , Ipv4 address is {{ansible_facts['ip_addresses'][0]}} 
+       and short host name is {{ ansible_facts['hostname'] }}

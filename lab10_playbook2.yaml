@@ -1,0 +1,36 @@
+---
+- name: This is a playbook to demo the management of files and folders
+  hosts: n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+  
+  tasks:
+  - name: Copying under /tmp/
+    copy: 
+      src: locfile
+      dest: /tmp/
+      mode: 0444
+      owner: annfernando
+      group: root
+
+  - name: Change selinux file type
+    file:
+      path: /tmp/locfile
+      setype: etc_t
+
+  - name: Check the status of /tmp/locfile
+    stat:
+      path: /tmp/locfile
+    register: stat_output
+
+  - name: Show the output 
+    debug:
+      var: stat_output
+
+  - name: Create an empty file
+    file:
+     path: /home/annfernando/
+     state: touch
+
+
+
+     
+  

@@ -1,0 +1,41 @@
+---
+- name: This is a playbook to demo the handling of task failures
+  hosts: linux
+  
+  tasks:
+   - name:
+     block:
+     - name: Adding a block of text to /etc/profile
+       blockinfile: 
+        path: /etc/profile
+        insertafter: yes
+        backup: yes
+        state: present
+        block: | 
+          export TMOUT=900
+
+     - name: Setting umask value to 0077
+       lineinfile: 
+        path: /etc/profile
+        regex: "^umask"
+        line: "umask 0077"
+        state: present
+
+     rescue:
+     - name: Adding a block of text 
+       blockinfile: 
+        path: ~/.bash_profile
+        insertafter: yes
+        backup: yes
+        state: present
+        block: | 
+          umask 0066
+
+     always:
+     - name: display a message 
+       debug:
+        msg: Playbook execution completed.
+  
+
+     
+  

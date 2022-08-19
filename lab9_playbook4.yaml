@@ -1,0 +1,14 @@
+---
+- name: This is a playbook which installs a software if defined.
+  hosts: n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+  vars:
+   packages: nmap
+
+  tasks:
+  - name: Install "{{ packages }}"" software
+    yum:
+     name: "{{ packages }}"
+     state: latest
+    when: packages is defined
+
+    

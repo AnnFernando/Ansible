@@ -1,0 +1,27 @@
+---
+- name: This is a playbook to demo the use of single handler
+  hosts: n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+  
+  tasks:
+  - name: Install apache and restart the apache web service
+    yum: 
+      name: httpd
+      state: latest
+    notify: restart_httpd
+
+  - blockinfile:
+      path: /var/www/html/index.html
+      insertafter: EOF
+      state: present 
+      block: |
+        n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+      create: true
+      
+  handlers:
+  - name: restart_httpd 
+    systemd:
+      name: httpd
+      state: restarted
+
+     
+  

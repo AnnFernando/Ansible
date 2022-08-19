@@ -1,0 +1,31 @@
+---
+- name: This is a playbook to demo the use of single handler
+  hosts: n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+  
+  tasks:
+  - name: Install apache and restart the apache web service
+    yum: 
+      name: mariadb-server, httpd
+      state: present
+    notify: 
+     - restart_httpd
+     - restart_mariadb
+    register: installation_result
+
+  - name: Display the names of the packages that were installed
+    debug:
+     msg: The names of the packages that were installed are {{ installation_result['results'] }}     
+
+  handlers:
+  - name: restart_httpd 
+    systemd:
+      name: httpd
+      state: restarted
+
+  - name: restart_mariadb 
+    systemd:
+      name: mariadb
+      state: restarted      
+
+     
+  

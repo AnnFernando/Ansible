@@ -1,0 +1,16 @@
+---
+- name: This is a playbook which captures user info.
+  hosts: linux
+
+  tasks:
+  - name: Capture user info
+    command: cat /etc/passwd
+    register: users
+
+  - name: Show which servers have this user n01517411
+    debug:
+     msg: "Servers have the user annfernando"
+    when: users['stdout'].find('annfernando') != -1
+
+
+    

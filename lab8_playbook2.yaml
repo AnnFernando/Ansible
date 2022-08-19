@@ -1,0 +1,33 @@
+---
+- name: This is a playbook to create a user and a group account 
+  hosts: n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+  tasks:
+   - name: Creation of user user5000
+     user:
+      name: user4000
+      uid: 5000
+      state: present
+  
+   - name: Creation of group cloudadmins
+     group:
+      name: cloudadmins
+      gid: 3000
+      state: present
+
+- name: This is a playbook to install apache and nmap
+  hosts: linux
+  tasks:
+   - name: Install apache and nmap software 
+     ansible.builtin.yum: 
+      name: 
+       - httpd
+       - nmap
+      state: latest
+  
+   - name: Start the Apache service and set it to auto-start on system reboots
+     ansible.builtin.systemd:
+      state: started
+      name: httpd
+      enabled: true
+     
+  

@@ -1,0 +1,36 @@
+---
+- name: Copy the local /etc/issue file to ansible-c-vm1 
+  hosts: n01517411-c-vm-dns-2.australiaeast.cloudapp.azure.com
+  tasks:
+   - name: Copy file with owner and permissions
+     ansible.builtin.copy:
+      src: /etc/issue
+      dest: /etc/
+      owner: user4000
+      group: cloudadmins
+      mode: '444'
+ 
+- name: Change the timezone on linux hosts to America/Edmonton
+  hosts: linux
+  tasks:
+   - name: Set timezone to America/Edmonton
+     timezone:
+      name: America/Edmonton
+
+- name: This is a playbook to create a user and a group account 
+  hosts: n01517411-c-vm-dns-1.australiaeast.cloudapp.azure.com
+  tasks:
+   - name: Creation of group devops
+     group:
+      name: devops
+      gid: 6000
+      state: present
+
+   - name: Creation of user devops1
+     user:
+      name: devops1
+      uid: 2500
+      state: present
+      groups: devops
+      append: yes
+  

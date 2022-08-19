@@ -1,0 +1,21 @@
+---
+- name: This is a playbook which adds a string to a file.
+  hosts: linux
+
+  tasks:
+  - blockinfile:
+      path: /tmp/conditional
+      insertafter: EOF
+      state: present 
+      block: |
+        This is my CentOS VM
+      create: true
+    when: 
+     - ansible_kernel == "4.18.0-193.28.1.el8_2.x86_64"
+     - ansible_distribution_version == "8.2"
+
+
+ 
+
+
+    
