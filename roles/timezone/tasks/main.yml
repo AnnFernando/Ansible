@@ -1,0 +1,6 @@
+---
+# tasks file for timezone
+- name: set timezone to America/Toronto
+  timezone:
+    name: America/Toronto
+  when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"

@@ -1,0 +1,11 @@
+---
+# tasks file for patching
+- name: Upgrade all packages
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
+  when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"
+  notify: 
+   - reboot_linuxnodes
+
+

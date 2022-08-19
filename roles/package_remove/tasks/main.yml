@@ -1,0 +1,8 @@
+---
+# tasks file for package_remove
+- name: Remove the packages rsync, ldap-utils and nis
+  ansible.builtin.yum: 
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ packages }}"
+  when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"

@@ -1,0 +1,4 @@
+---
+# handlers file for patching
+- name: reboot_linuxnodes
+  ansible.builtin.reboot:

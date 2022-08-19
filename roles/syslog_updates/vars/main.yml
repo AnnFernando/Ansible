@@ -1,0 +1,6 @@
+---
+# vars file for syslog_updates
+syslogConfPath: /etc/rsyslog.conf
+syslogDPath: /etc/rsyslog.d
+varlogPath: /var/log
+textblock: $FileCreateMode 0640

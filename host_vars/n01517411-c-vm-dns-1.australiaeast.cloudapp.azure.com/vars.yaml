@@ -1,0 +1,3 @@
+package1: mariadb
+package2: dracut
+package3: snappy

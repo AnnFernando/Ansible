@@ -1,0 +1,7 @@
+---
+# vars file for profile_mgmt
+etcPath: /etc/profile
+bashPath: ~/.bash_profile
+regex: ^umask
+linetext: umask 0077
+blocktext: export TMOUT=900

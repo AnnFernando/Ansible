@@ -1,0 +1,9 @@
+---
+# tasks file for package_install
+- name: Install the packages cifs-utils, nfs-utils, audit, and chrony
+  yum: 
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages }}"
+  when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"
+

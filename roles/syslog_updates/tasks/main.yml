@@ -1,0 +1,27 @@
+---
+# tasks file for syslog_updates
+- name: Adding a block of text to /etc/rsyslog.conf file
+  blockinfile: 
+    path: "{{ syslogConfPath }}"
+    insertafter: 'yes'
+    backup: 'yes'
+    state: present
+    block: | 
+      "{{ textblock }}"
+
+- name: 
+  file: 
+    dest: "{{ syslogDPath }}" 
+    owner: root 
+    group: root 
+    mode: 0640
+    recurse: 'yes'
+
+- name: 
+  file: 
+    dest: "{{ varlogPath }}" 
+    owner: root 
+    group: root 
+    mode: 0775
+  notify: 
+   - restart_rsyslog

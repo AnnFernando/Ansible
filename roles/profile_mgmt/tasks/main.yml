@@ -1,0 +1,38 @@
+---
+# tasks file for profile_mgmt
+- name:
+  block:
+  - name: Adding a block of text to /etc/profile
+    blockinfile: 
+      path: "{{ etcPath }}"
+      insertafter: 'yes'
+      backup: 'yes'
+      state: present
+      block: | 
+        "{{ blocktext }}"
+
+  - name: Setting umask value to 0077
+    lineinfile: 
+      path: "{{ etcPath }}"
+      regex: "{{ regex }}"
+      line: "{{ linetext }}"
+      state: present
+
+  rescue:
+  - name: Adding a block of text 
+    blockinfile: 
+      path: "{{ bashPath }}"
+      insertafter: 'yes'
+      backup: 'yes'
+      state: present
+      block: | 
+        umask 0066
+
+  always:
+  - name: display a message 
+    debug:
+      msg: Playbook execution completed.
+  
+
+     
+  
